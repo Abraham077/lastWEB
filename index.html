@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astana Events Guide - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a class="navbar-brand" href="index.html">Astana Guide</a>
+            <button class="navbar-toggler" id="navbarToggler">☰</button>
+            <ul class="navbar-nav" id="navbarNav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="events.html">Events</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1>Discover Astana</h1>
+                <p>Your guide to the best events, activities, and attractions in Kazakhstan's capital</p>
+                <a href="events.html" class="btn btn-warning">Explore Events</a>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <h2 class="text-center">Why Visit Astana?</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>Modern Architecture</h3>
+                                <p>Baikonur Cosmodrome, Khan Shatyr, and other architectural marvels</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>Cultural Events</h3>
+                                <p>Festivals, concerts, and cultural celebrations throughout the year</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>Outdoor Activities</h3>
+                                <p>Ishim River, parks, and recreational areas for all seasons</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="upcoming-events">
+            <div class="container">
+                <h2 class="text-center">Upcoming Events</h2>
+                <div id="upcomingEventsContainer" class="row">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>SE 2437 Ibrahim Nygyman</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const upcomingEvents = [
+            {
+                id: 1,
+                title: "Astana International Jazz Festival",
+                date: "2025-03-15",
+                location: "Astana Opera House",
+                description: "Experience world-class jazz musicians from around the globe.",
+                image: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                title: "Nauryz Festival",
+                date: "2025-03-21",
+                location: "Central Park",
+                description: "Celebration of the traditional New Year with folk performances and food.",
+                image: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                title: "Winter Sports Championship",
+                date: "2025-02-10",
+                location: "Astana Arena",
+                description: "Ice hockey, figure skating, and winter sports competitions.",
+                image: "https://images.unsplash.com/photo-1548909027-1a6379b8a8d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        function displayUpcomingEvents() {
+            const container = document.getElementById('upcomingEventsContainer');
+            container.innerHTML = '';
+
+            for (let i = 0; i < upcomingEvents.length; i++) {
+                const event = upcomingEvents[i];
+                
+                const card = document.createElement('div');
+                card.className = 'col-md-4';
+                card.innerHTML = `
+                    <div class="card event-card">
+                        <img src="${event.image}" alt="${event.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${event.title}</h5>
+                            <p class="card-text"><strong>Date:</strong> ${event.date}</p>
+                            <p class="card-text"><strong>Location:</strong> ${event.location}</p>
+                            <p class="card-text">${event.description}</p>
+                            <a href="events.html" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            }
+        }
+
+        document.getElementById('navbarToggler').addEventListener('click', function() {
+            document.getElementById('navbarNav').classList.toggle('show');
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            displayUpcomingEvents();
+        });
+    </script>
+</body>
+</html>

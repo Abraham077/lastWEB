@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Astana Events Guide</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a class="navbar-brand" href="index.html">Astana Guide</a>
+            <button class="navbar-toggler" id="navbarToggler">☰</button>
+            <ul class="navbar-nav" id="navbarNav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="events.html">Events</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="py-5">
+            <div class="container">
+                <h1 class="text-center">About Astana</h1>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Astana, the capital city of Kazakhstan, is a vibrant metropolis that seamlessly blends modernity with tradition. Formerly known as Akmola and Tselinograd, Astana was renamed in 1997 when it became the nation's capital.</p>
+                        <p>The city is renowned for its futuristic architecture, including the iconic Bayterek Tower, Khan Shatyr Entertainment Center, and the Palace of Peace and Reconciliation. These landmarks make Astana a unique destination that attracts millions of visitors each year.</p>
+                        <p>Our guide aims to showcase the rich cultural heritage, exciting events, and diverse activities that Astana offers to residents and tourists alike.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Astana City View" class="img-fluid">
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <h2>Our Mission</h2>
+                    <p>To provide residents and visitors with up-to-date information about events, activities, and attractions in Astana, making it easier to discover and enjoy all that our city has to offer.</p>
+                    
+                    <h2 class="mt-4">Team Members</h2>
+                    <div class="row" id="teamMembers">
+                    </div>
+                </div>
+                
+                <div class="mt-5">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <form id="newsletterForm">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                    <div id="formMessage" class="mt-2"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>SE 2437 Ibrahim Nygyman</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const teamMembers = [
+            { name: "John Smith", role: "Frontend Developer" },
+            { name: "Jane Doe", role: "UI/UX Designer" },
+            { name: "Mike Johnson", role: "Backend Developer" }
+        ];
+
+        function displayTeamMembers() {
+            const container = document.getElementById('teamMembers');
+            container.innerHTML = '';
+
+            for (let i = 0; i < teamMembers.length; i++) {
+                const member = teamMembers[i];
+                
+                const col = document.createElement('div');
+                col.className = 'col-md-4 mb-3';
+                col.innerHTML = `
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${member.name}</h5>
+                            <p class="card-text">${member.role}</p>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(col);
+            }
+        }
+
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const messageElement = document.getElementById('formMessage');
+            
+            if (!validateEmail(email)) {
+                messageElement.innerHTML = '<div class="alert alert-danger">Please enter a valid email address.</div>';
+                return;
+            }
+            
+            let subscribers = JSON.parse(localStorage.getItem('subscribers')) || [];
+            if (!subscribers.includes(email)) {
+                subscribers.push(email);
+                localStorage.setItem('subscribers', JSON.stringify(subscribers));
+                messageElement.innerHTML = '<div class="alert alert-success">Thank you for subscribing!</div>';
+                document.getElementById('email').value = '';
+            } else {
+                messageElement.innerHTML = '<div class="alert alert-info">You are already subscribed!</div>';
+            }
+        });
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        document.getElementById('navbarToggler').addEventListener('click', function() {
+            document.getElementById('navbarNav').classList.toggle('show');
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            displayTeamMembers();
+        });
+    </script>
+</body>
+</html>
